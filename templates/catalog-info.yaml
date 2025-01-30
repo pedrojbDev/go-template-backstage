@@ -1,0 +1,8 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: go-templates
+  description: Templates para criação de serviços em GoLang.
+spec:
+  targets:
+    - ./go-template.yaml
