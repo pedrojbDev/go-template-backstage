@@ -32,7 +32,7 @@ spec:
       name: Buscar Template Base
       action: fetch:template
       input:
-        url: https://github.com/pedrojbDev/backstage-go-template/blob/main/go-base
+        url: https://github.com/pedrojbDev/backstage-go-template/tree/main/go-base
         targetPath: .
     - id: process-template
       name: Processar Template
@@ -49,7 +49,7 @@ spec:
       action: publish:github
       input:
         repoUrl: github.com/{{ parameters.owner }}/{{ parameters.projectName }}
-        repoVisibility: {{ parameters.repoVisibility }}
+        repoVisibility: ${{ parameters.repoVisibility }}
     - id: register-in-catalog
       name: Registrar no Catálogo
       action: catalog:register
