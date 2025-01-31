@@ -38,7 +38,7 @@ spec:
       name: Buscar Template Base
       action: fetch:template
       input:
-        url: https://raw.githubusercontent.com/pedrojbDev/go-template-backstage/main/go-base
+        url: https://github.com/pedrojbDev/go-template-backstage/archive/main.zip
         targetPath: .
 
     - id: publish-to-repo
