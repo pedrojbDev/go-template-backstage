@@ -32,30 +32,22 @@ spec:
             - public
             - private
           description: Defina a visibilidade do repositório GitHub.
+
   steps:
     - id: fetch-template
       name: Buscar Template Base
       action: fetch:template
       input:
-        url: https://github.com/pedrojbDev/go-template-backstage/tree/main/go-base
+        url: https://raw.githubusercontent.com/pedrojbDev/go-template-backstage/main/go-base
         targetPath: .
-    - id: process-template
-      name: Processar Template
-      action: fetch:plain
-      input:
-        url: ./ 
-        targetPath: .
-        - id: verify-setup
-        name: Verificar Estrutura do Projeto
-        action: fs:readdir
-        input:
-          path: .
+
     - id: publish-to-repo
       name: Publicar no GitHub
       action: publish:github
       input:
         repoUrl: github.com/{{ parameters.owner }}/{{ parameters.projectName }}
-        repoVisibility: ${{ parameters.repoVisibility }}
+        repoVisibility: "{{ parameters.repoVisibility }}"
+
     - id: register-in-catalog
       name: Registrar no Catálogo
       action: catalog:register
@@ -63,6 +55,7 @@ spec:
         location:
           type: url
           target: https://github.com/{{ parameters.owner }}/{{ parameters.projectName }}/blob/main/catalog-info.yaml
+
   output:
     links:
       - title: Repositório do Projeto
