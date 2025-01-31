@@ -27,16 +27,14 @@ spec:
               - github.com
 
   steps:
-  - id: fetch-template
-    name: Fetch Go Template
-    action: fetch:template
-    input:
-      url: https://codeload.github.com/pedrojbDev/go-template-backstage/zip/main
-      templatePath: go-base
-      values:
-        name: ${{ parameters.name }}
-      headers:
-        Authorization: "Bearer ${{ secrets.GITHUB_TOKEN }}"
+    - id: fetch-template
+      name: Fetch Go Template
+      action: fetch:template
+      input:
+        url: https://github.com/pedrojbDev/go-template-backstage/archive/main.zip
+        templatePath: go-base
+        values:
+          name: ${{ parameters.name }}
 
     - id: publish
       name: Publish to GitHub
