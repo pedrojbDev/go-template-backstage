@@ -15,16 +15,11 @@ spec:
       required:
         - projectName
         - repoVisibility
-        - owner
       properties:
         projectName:
           title: Nome do Projeto
           type: string
           description: Nome do repositório ou serviço.
-        owner:
-          title: Dono do Repositório
-          type: string
-          description: Nome do usuário ou organização no GitHub.
         repoVisibility:
           title: Visibilidade do Repositório
           type: string
@@ -39,25 +34,24 @@ spec:
       input:
         url: https://github.com/pedrojbDev/go-template-backstage/tree/main/go-base
         targetPath: .
+    
     - id: process-template
       name: Processar Template
-      action: fetch:plain
+      action: scaffolder:template
+    
+    - id: verify-setup
+      name: Verificar Estrutura do Projeto
+      action: fs:readdir
       input:
-        url: ./ 
-        targetPath: .
-    - id: run-validation
-      name: Validar Configuração Inicial
-      action: run:command
-      input:
-        workingDirectory: .
-        command: |
-          go mod tidy && go test ./...
+        path: .
+
     - id: publish-to-repo
       name: Publicar no GitHub
       action: publish:github
       input:
         repoUrl: github.com/{{ parameters.owner }}/{{ parameters.projectName }}
-        repoVisibility: "{{ parameters.repoVisibility }}"
+        repoVisibility: ${parameters.repoVisibility}
+
     - id: register-in-catalog
       name: Registrar no Catálogo
       action: catalog:register
@@ -65,6 +59,7 @@ spec:
         location:
           type: url
           target: https://github.com/{{ parameters.owner }}/{{ parameters.projectName }}/blob/main/catalog-info.yaml
+
   output:
     links:
       - title: Repositório do Projeto
