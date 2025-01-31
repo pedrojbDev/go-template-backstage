@@ -31,8 +31,7 @@ spec:
       name: Fetch Go Template
       action: fetch:template
       input:
-        url: https://github.com/pedrojbDev/go-template-backstage/archive/main.zip
-        templatePath: go-base
+        url: https://github.com/pedrojbDev/go-template-backstage/tree/main/go-base
         values:
           name: ${{ parameters.name }}
 
